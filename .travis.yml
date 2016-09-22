@@ -1,0 +1,21 @@
+---
+sudo: required
+
+env:
+  - image: hallo-welt
+    expose_port: 8080
+    expect_string: "Hallo Welt"
+
+services:
+  - docker
+
+before_install:
+  # Pull container.
+  - 'sudo docker pull leventyalcin/${image}:latest'
+
+script:
+  - docker run -d -p ${expose_port}:${expose_port} --name ${image}
+  - curl -s http://localhost:${expose_port} | grep '${expect_string}'
+
+after_success:
+  - sudo docker rm -f ${image}
