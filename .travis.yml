@@ -11,7 +11,7 @@ services:
 
 before_install:
   # Pull container.
-  - 'sudo docker pull leventyalcin/${image}:latest'
+  - 'sudo docker pull leventyalcin/${image}:latest ${image}'
 
 script:
   - docker run -d -p ${expose_port}:${expose_port} --name ${image}
@@ -19,4 +19,3 @@ script:
 
 after_success:
   - sudo docker rm -f ${image}
-
