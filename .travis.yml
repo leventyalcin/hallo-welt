@@ -5,16 +5,17 @@ env:
   - image: hallo-welt
     expose_port: 8080
     expect_string: "Hallo Welt"
+    account: leventyalcin
 
 services:
   - docker
 
 before_install:
   # Pull container.
-  - 'sudo docker pull leventyalcin/${image}:latest'
+  - 'sudo docker pull ${account}/${image}:latest'
 
 script:
-  - docker run -d -p ${expose_port}:${expose_port} --name ${image} ${image}
+  - docker run -d -p ${expose_port}:${expose_port} --name ${account}/${image} ${image}
   - curl -s http://localhost:${expose_port} | grep '${expect_string}'
 
 after_success:
