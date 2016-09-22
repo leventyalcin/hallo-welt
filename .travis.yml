@@ -15,7 +15,7 @@ before_install:
   - 'sudo docker pull ${account}/${image}:latest'
 
 script:
-  - docker run -d -p ${expose_port}:${expose_port} --name ${account}/${image} ${image}
+  - docker run -d -p ${expose_port}:${expose_port} --name ${image} ${account}/${image}
   - curl -s http://localhost:${expose_port} | grep '${expect_string}'
 
 after_success:
