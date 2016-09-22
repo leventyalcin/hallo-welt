@@ -11,10 +11,10 @@ services:
 
 before_install:
   # Pull container.
-  - 'sudo docker pull leventyalcin/${image}:latest ${image}'
+  - 'sudo docker pull leventyalcin/${image}:latest'
 
 script:
-  - docker run -d -p ${expose_port}:${expose_port} --name ${image}
+  - docker run -d -p ${expose_port}:${expose_port} --name ${image} ${image}
   - curl -s http://localhost:${expose_port} | grep '${expect_string}'
 
 after_success:
