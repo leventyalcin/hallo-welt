@@ -16,6 +16,7 @@ before_install:
 
 script:
   - docker run -d -p ${expose_port}:${expose_port} --name ${image} ${account}/${image}
+  - echo curl -s http://localhost:${expose_port} | grep '${expect_string}'
   - curl -s http://localhost:${expose_port} | grep '${expect_string}'
 
 after_success:
