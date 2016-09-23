@@ -18,8 +18,6 @@ script:
   - 'docker run -d -p ${expose_port}:${expose_port} --name ${image} ${account}/${image}'
   - 'sudo netstat -tnlp'
   - 'curl -s http://localhost:8080'
-  - 'docker inspect ${image}'
-  - 'echo curl -s http://localhost:${expose_port} | grep "${expect_string}"'
   - 'curl -s http://localhost:${expose_port} | grep "${expect_string}"'
 
 after_success:
