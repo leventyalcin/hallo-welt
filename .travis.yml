@@ -15,9 +15,12 @@ before_install:
   - 'sudo docker pull ${account}/${image}:latest'
 
 script:
-  - docker run -d -p ${expose_port}:${expose_port} --name ${image} ${account}/${image}
-  - echo curl -s http://localhost:${expose_port} | grep '${expect_string}'
-  - curl -s http://localhost:${expose_port} | grep '${expect_string}'
+  - 'docker run -d -p ${expose_port}:${expose_port} --name ${image} ${account}/${image}'
+  - 'sudo netstat -tnlp'
+  - 'curl -s http://localhost:8080'
+  - 'docker inspect ${image}'
+  - 'echo curl -s http://localhost:${expose_port} | grep "${expect_string}"'
+  - 'curl -s http://localhost:${expose_port} | grep "${expect_string}"'
 
 after_success:
   - sudo docker rm -f ${image}
