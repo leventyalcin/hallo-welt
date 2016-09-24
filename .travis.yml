@@ -5,17 +5,16 @@ env:
   - image: hallo-welt
     expose_port: 8080
     expect_string: "Hallo Welt"
-    account: leventyalcin
 
 services:
   - docker
 
 before_install:
   # Pull container.
-  - 'sudo docker pull ${account}/${image}:latest'
+  - 'docker build --rm --no-cache=true -t ${image}'
 
 script:
-  - 'docker run -d -p ${expose_port}:${expose_port} --name ${image} ${account}/${image}'
+  - 'docker run -d -p ${expose_port}:${expose_port} --name ${image} ${image}'
   - 'sudo netstat -tnlp'
   - 'curl -s http://localhost:8080'
   - 'curl -s http://localhost:${expose_port} | grep "${expect_string}"'
