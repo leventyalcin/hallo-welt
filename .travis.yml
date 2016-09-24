@@ -11,7 +11,7 @@ services:
 
 before_install:
   # Pull container.
-  - 'docker build --rm --no-cache=true -t ${image}'
+  - 'docker build --rm --no-cache=true -t ${image} .'
 
 script:
   - 'docker run -d -p ${expose_port}:${expose_port} --name ${image} ${image}'
